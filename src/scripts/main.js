@@ -1,4 +1,4 @@
-$.get(WTM.settings.base_url, function(data) {
+$.get(WTM.settings.base_url, function (data) {
     var _title = document.title;
 
     var persist_scale = localStorage.persist_scale;
@@ -9,18 +9,18 @@ $.get(WTM.settings.base_url, function(data) {
     var $wtm_scripts = $('script');
 
     $(document.body).html(data
-            .replace('<head>', '<head><base href="' + WTM.settings.base_url + '">')
-            .replace(/\ssrc="/g, ' data-src="')
-            .replace(/'#555'/g, "'rgba(255, 255, 255, .13)'")
-            .replace(/'#111'/g, "'rgba(0, 0, 0, .75)'")
-            );
+        .replace('<head>', '<head><base href="' + WTM.settings.base_url + '">')
+        .replace(/\ssrc="/g, ' data-src="')
+        .replace(/'#555'/g, "'rgba(255, 255, 255, .13)'")
+        .replace(/'#111'/g, "'rgba(0, 0, 0, .75)'")
+    );
 
     var loaded_scripts = 0;
     var scripts = [];
     var $scripts = $('script').not($wtm_scripts);
     var $eval = $([]);
     var _settings = WTM.settings;
-    $scripts.each(function() {
+    $scripts.each(function () {
         var $this = $(this);
         var src = $this.data('src');
         if (!src) {
@@ -32,15 +32,15 @@ $.get(WTM.settings.base_url, function(data) {
         scripts.push(src);
     });
 
-    $scripts.not($eval).each(function() {
+    $scripts.not($eval).each(function () {
         var $this = $(this);
         var src = $this.data('src');
 
-        $.get(src, function(data) {
+        $.get(src, function (data) {
             loaded_scripts += 1;
             scripts[scripts.indexOf(src)] = data;
             if (loaded_scripts === scripts.length) {
-                $.each(scripts, function(i, item) {
+                $.each(scripts, function (i, item) {
                     eval(item);
                 });
                 main();
@@ -60,13 +60,14 @@ $.get(WTM.settings.base_url, function(data) {
 
     function hex_to_rgba(hex, alpha) {
         return 'rgba(' + [parseInt(hex.substr(1, 2), 16),
-            parseInt(hex.substr(3, 2), 16),
-            parseInt(hex.substr(5, 2), 16)].join(',') +
-                ',' + alpha + ')';
+                parseInt(hex.substr(3, 2), 16),
+                parseInt(hex.substr(5, 2), 16)
+            ].join(',') +
+            ',' + alpha + ')';
     }
 
     function _draw_text_icon(text, sx, sy, dir, fill,
-            alpha, font_size, font_face, stroke, text_align, text_baseline) {
+        alpha, font_size, font_face, stroke, text_align, text_baseline) {
         if (alpha) {
             if (fill) {
                 fill = hex_to_rgba(fill, alpha);
@@ -97,6 +98,7 @@ $.get(WTM.settings.base_url, function(data) {
     function main() {
 
         var _player;
+
         function center_view(x, y, c_width, c_height) {
             map_pan[0] = -(x * c_width * map_scale) + c_width / 2;
             map_pan[1] = -(y * c_width * map_scale) + c_height / 2;
@@ -108,7 +110,7 @@ $.get(WTM.settings.base_url, function(data) {
         }
 
         var _draw_player = draw_player;
-        draw_player = function(canvas, ctx, item, dt) {
+        draw_player = function (canvas, ctx, item, dt) {
             if (!isDraggingMap && WTM.settings.map_center) {
                 center_view(item.x, item.y, canvas.width, canvas.height);
             }
@@ -119,7 +121,7 @@ $.get(WTM.settings.base_url, function(data) {
         var _draw_map_object = draw_map_object;
         var icon_texts = WTM.icon_texts;
 
-        draw_map_object = function(canvas, ctx, item) {
+        draw_map_object = function (canvas, ctx, item) {
 
             var x = item.x;
             var y = item.y;
@@ -190,10 +192,10 @@ $.get(WTM.settings.base_url, function(data) {
             var $caption = $('<div class="wtm-caption">');
             var $contents = $('<div id="wtm-' + id + '" class="wtm-panel-contents">');
             return $('<div id="wtm-' + id + '-root" class="wtm-panel">')
-                    .append($caption)
-                    .data('$caption', $caption)
-                    .append($contents)
-                    .data('$contents', $contents);
+                .append($caption)
+                .data('$caption', $caption)
+                .append($contents)
+                .data('$contents', $contents);
         }
 
         var $map_root = add_panel('map').appendTo(document.body);
@@ -208,16 +210,18 @@ $.get(WTM.settings.base_url, function(data) {
 
         var $mapsummary = $('<table id="wtm-mapsummary">').appendTo($map_root);
         var mapsummary_rows = [$('<tr id="wtm-bluerow">').appendTo($mapsummary),
-            $('<tr id="wtm-redrow">').appendTo($mapsummary)];
+            $('<tr id="wtm-redrow">').appendTo($mapsummary)
+        ];
         var summary_order = ['Fighter', 'Bomber', 'Assault',
-            'Tracked', 'Wheeled', 'Ship', 'Airdefence', 'Structure'];
+            'Tracked', 'Wheeled', 'Ship', 'Airdefence', 'Structure'
+        ];
 
         var _update_object_positions = update_object_positions;
-        update_object_positions = function(objects) {
+        update_object_positions = function (objects) {
             _player = null;
 
 
-            objects.sort(function(a, b) {
+            objects.sort(function (a, b) {
                 if (a.icon === 'Player') {
                     _player = a;
                 }
@@ -226,14 +230,13 @@ $.get(WTM.settings.base_url, function(data) {
                 return (_type_priority[a.type] || 0) > (_type_priority[b.type] || 0);
             });
 
-            var summary = {
-            };
+            var summary = {};
 
             if (map_info) {
                 var min_distance = null;
                 var friendlies = 0;
                 var enemies = 0;
-                $.each(objects, function(i, item) {
+                $.each(objects, function (i, item) {
                     var color = item['color[]'];
                     var team = color[0] > color[2] ? 'red' : 'blue';
 
@@ -270,13 +273,13 @@ $.get(WTM.settings.base_url, function(data) {
                 rows[1].html('');
                 var wtm_icons = WTM.icons;
                 var order = summary_order
-                        .slice(0)
-                        .concat(Object.keys(summary)
-                                .filter(function(x) {
-                                    return !~summary_order.indexOf(x);
-                                }));
+                    .slice(0)
+                    .concat(Object.keys(summary)
+                        .filter(function (x) {
+                            return !~summary_order.indexOf(x);
+                        }));
 
-                $.each(order, function(i, icon) {
+                $.each(order, function (i, icon) {
                     var team_objects = summary[icon];
                     if (!team_objects) {
                         return;
@@ -293,18 +296,18 @@ $.get(WTM.settings.base_url, function(data) {
                     } else {
                         icon_text = icon[0];
                     }
-                    $.each(team_objects, function(i, count) {
+                    $.each(team_objects, function (i, count) {
                         var $row = rows[i];
                         var $icon = $('<th>').text(count ? icon_text : '')
-                                .attr('title', icon)
-                                .appendTo($row);
+                            .attr('title', icon)
+                            .appendTo($row);
                         if (aircraft) {
                             $icon.addClass('wtm-aircraft')
-                                    .css('fontSize', 23 * wtm_icons[icon_text] + 'px');
+                                .css('fontSize', 23 * wtm_icons[icon_text] + 'px');
                         }
                         $('<td>').text(count ? count : '')
-                                .attr('title', icon)
-                                .appendTo($row);
+                            .attr('title', icon)
+                            .appendTo($row);
                         if (!count) {
 
                         }
@@ -339,7 +342,7 @@ $.get(WTM.settings.base_url, function(data) {
         var _map_units = WTM.settings.units === 'meters' ? 'km' : 'mi';
 
         var _update_map_info = update_map_info;
-        update_map_info = function(info) {
+        update_map_info = function (info) {
             _update_map_info.apply(this, arguments);
 
             var map_min = info.map_min;
@@ -353,15 +356,15 @@ $.get(WTM.settings.base_url, function(data) {
             _map_height = map_max[1] - map_min[0];
 
             $map_dimension_info.html(
-                    Math.round(WTM.m2x(_map_width, _map_units))
-                    + '&times'
-                    + Math.round(WTM.m2x(_map_height, _map_units))
-                    + ' ' + _map_units
-                    );
+                Math.round(WTM.m2x(_map_width, _map_units)) +
+                '&times' +
+                Math.round(WTM.m2x(_map_height, _map_units)) +
+                ' ' + _map_units
+            );
             $map_grid_info.text(
-                    WTM.m2x(map_info.grid_steps[0], _map_units).toFixed(2)
-                    + ' ' + _map_units
-                    );
+                WTM.m2x(map_info.grid_steps[0], _map_units).toFixed(2) +
+                ' ' + _map_units
+            );
 
             map_scale = _map_width * parseFloat(persist_scale, 10);
 
@@ -394,15 +397,16 @@ $.get(WTM.settings.base_url, function(data) {
         }
 
         var $map_scaleinfo = $('<span id="wtm-mapscale">').appendTo($map_info);
+
         function update_scale() {
             $map_scaleinfo.text(map_scale.toFixed(2));
         }
 
         var _addWheelHandler = addWheelHandler;
-        addWheelHandler = function(elem, handler) {
+        addWheelHandler = function (elem, handler) {
             var _handler = handler;
 
-            handler = function() {
+            handler = function () {
                 _handler.apply(this, arguments);
                 persist_scale = localStorage.persist_scale = map_scale / _map_width;
                 update_scale();
@@ -411,24 +415,23 @@ $.get(WTM.settings.base_url, function(data) {
             return _addWheelHandler.apply(this, arguments);
         };
 
-        save_positions = function() {
-        };
+        save_positions = function () {};
 
         function update_table(data, data_store, $table, data_key) {
             if (!data || !data.valid) {
-                $.each(data_store, function(key) {
+                $.each(data_store, function (key) {
                     delete data_store[key];
                 });
                 $table.find('tr').remove();
                 return;
             }
-            $.each(data_store, function(key, $val) {
+            $.each(data_store, function (key, $val) {
                 if (!(key in data)) {
                     $val.parent().remove();
                     delete data_store[key];
                 }
             });
-            $.each(data, function(key, val) {
+            $.each(data, function (key, val) {
                 if (key === 'valid') {
                     return;
                 }
@@ -442,11 +445,11 @@ $.get(WTM.settings.base_url, function(data) {
                 if (!$val) {
                     var ls_key = _key[0] + '_hl_' + data_key;
                     var $row = $('<tr>');
-                    $row.click(function() {
-                        localStorage[ls_key] = 1 - (localStorage[ls_key] || 0);
-                        $row.toggleClass('hl');
-                    })
-                            .append($('<th>').text(_key[0].replace('_', ' ')));
+                    $row.click(function () {
+                            localStorage[ls_key] = 1 - (localStorage[ls_key] || 0);
+                            $row.toggleClass('hl');
+                        })
+                        .append($('<th>').text(_key[0].replace('_', ' ')));
                     if (localStorage[ls_key] * 1) {
                         $row.addClass('hl');
                     }
@@ -460,42 +463,42 @@ $.get(WTM.settings.base_url, function(data) {
 
         var $indicators_table = $('<table class="wtm-data">').appendTo('#wtm-indicators');
         var indicators_data = {};
+
         function update_indicators(data) {
             update_table(data, indicators_data, $indicators_table, 'indicators');
         }
 
         var $state_table = $('<table class="wtm-data">').appendTo('#wtm-state');
         var state_data = {};
+
         function update_state(data) {
             update_table(data, state_data, $state_table, 'state');
         }
 
-        load_positions = function() {
-        };
+        load_positions = function () {};
 
-        $.fn.resizable = function() {
-        };
+        $.fn.resizable = function () {};
 
         init();
 
         // Clear existing intervals
-        for (var i = 1, n = setTimeout(function() {
-        }, 0); i < n; i++) {
+        for (var i = 1, n = setTimeout(function () {}, 0); i < n; i++) {
             window.clearInterval(i);
         }
 
         poll_url('/map_obj.json',
-                update_object_positions, _settings.object_update_rate, true);
+            update_object_positions, _settings.object_update_rate, true);
         poll_url('/map_info.json',
-                update_map_info, _settings.map_info_update_rate, true);
+            update_map_info, _settings.map_info_update_rate, true);
         var state_xhr = poll_url('/state',
-                update_state, _settings.panels_update_rate, _settings.update_state);
+            update_state, _settings.panels_update_rate, _settings.update_state);
         var indicators_xhr = poll_url('/indicators',
-                update_indicators, _settings.panels_update_rate, _settings.update_indicators);
+            update_indicators, _settings.panels_update_rate, _settings.update_indicators);
 
         update_scale();
 
         var panel_padding = 5;
+
         function position_panels() {
             var canvas_size = Math.max(document.documentElement.clientHeight - 80, 350);
             if ($canvas.width() !== canvas_size) {
@@ -508,23 +511,23 @@ $.get(WTM.settings.base_url, function(data) {
 
         function add_checkbox($panel, setting, xhr) {
             $panel.data('$caption').append($('<div class="wtm-toggle">')
-                    .append(
-                            $('<label>')
-                            .attr('for', setting + '-toggle')
-                            .text('Update')
-                            )
-                    .append(
-                            $('<input type="checkbox">')
-                            .attr('id', setting + '-toggle')
-                            .attr('checked', !!_settings[setting])
-                            .change(function() {
-                                var checked = this.checked;
-                                xhr.on = checked;
-                                localStorage[setting] = _settings[setting] = checked * 1;
-                                $panel[(checked ? 'remove' : 'add') + 'Class']('off');
-                            })
-                            )
-                    );
+                .append(
+                    $('<label>')
+                    .attr('for', setting + '-toggle')
+                    .text('Update')
+                )
+                .append(
+                    $('<input type="checkbox">')
+                    .attr('id', setting + '-toggle')
+                    .attr('checked', !!_settings[setting])
+                    .change(function () {
+                        var checked = this.checked;
+                        xhr.on = checked;
+                        localStorage[setting] = _settings[setting] = checked * 1;
+                        $panel[(checked ? 'remove' : 'add') + 'Class']('off');
+                    })
+                )
+            );
             if (!_settings[setting]) {
                 $panel.addClass('off');
             }
@@ -535,14 +538,13 @@ $.get(WTM.settings.base_url, function(data) {
 
         position_panels();
 
-        window.onload = function() {
-        };
+        window.onload = function () {};
 
-        $(window).resize(function() {
-//            map_scale = map_scale / (ui.size.width / _canvas.width);
+        $(window).resize(function () {
+            //            map_scale = map_scale / (ui.size.width / _canvas.width);
             position_panels();
         });
     }
-}).fail(function() {
+}).fail(function () {
     window.location.href = 'error.html';
 });

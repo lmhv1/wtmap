@@ -2,6 +2,7 @@
     font-family: 'Communist';
     src: url('chrome-extension://__MSG_@@extension_id__/fonts/communist.ttf');
 }
+
 @font-face {
     font-family: 'plane_icons';
     src: url('chrome-extension://__MSG_@@extension_id__/fonts/icons.ttf');
@@ -14,49 +15,62 @@
 #wtm-wrapper h5 {
     font-weight: normal;
 }
+
 #wtm-options label {
     display: block;
 }
+
 #wtm-options label[for=units-feet],
 #wtm-options label[for=units-meters] {
     display: inline;
 }
+
 #wtm-options table .text {
     position: relative;
     top: -1px;
 }
+
 #wtm-options #installed {
     margin: 1.5em 0;
     display: none;
     color: #aaa;
 }
+
 #wtm-options #goto {
     margin: 1.5em 0;
 }
+
 #wtm-options button,
 #wtm-options input {
     position: relative;
 }
+
 #wtm-options #proximity_sound_file {
     width: 50em;
 }
+
 #wtm-options input[type=checkbox],
 #wtm-options #test_sound,
 #wtm-options input[type=text] {
     top: -2px;
 }
+
 #wtm-options table {
     border-collapse: collapse;
 }
+
 #wtm-options td {
     padding-left: 0;
 }
+
 #wtm-options .input_text {
     width: 15em;
 }
-#wtm-options .input_number{
+
+#wtm-options .input_number {
     width: 3em;
 }
+
 #wtm-options #plane_icon_preview {
     font-family: 'plane_icons';
     position: absolute;
@@ -73,6 +87,7 @@
     margin-right: 20px;
     top: 0;
 }
+
 #wtm-wrapper {
     padding-top: 5px;
     position: relative;
@@ -81,9 +96,11 @@
     margin: auto;
     color: #333;
 }
+
 #wtm-wrapper h1 {
     border-bottom: 4px solid rgba(0, 80, 122, .15);
 }
+
 #wtm-options label[for=units-feet],
 #wtm-options label[for=units-meters],
 #wtm-wrapper .text {
@@ -114,9 +131,11 @@
 #wtm-options #goto a {
     font-size: 1.15em;
 }
+
 #wtm-options #goto_link {
     position: relative;
 }
+
 #wtm-options #goto_sub {
     position: absolute;
     left: -5%;
@@ -127,6 +146,7 @@
     margin-top: -5%;
     opacity: 0;
 }
+
 #wtm-options #goto {
     background: rgba(255, 255, 0, .15);
     padding: .3em .5em .2em;
@@ -155,18 +175,23 @@
     white-space: nowrap;
     font-family: 'Consolas', 'Lucida Console', monospace;
 }
+
 #wtm-mapscale:before {
     content: 'Scale: ';
 }
+
 #wtm-mapscale:after {
     content: '\00d7';
 }
+
 #wtm-mapdimensions:before {
     content: 'Map: ';
 }
+
 #wtm-mapgrid:before {
     content: 'Grid: ';
 }
+
 #wtm-mapdimensions,
 #wtm-mapgrid,
 #wtm-mapscale {
@@ -184,11 +209,13 @@
     top: 5px;
     right: 5px;
 }
+
 #wtm-sidepanels .wtm-panel {
     margin-right: 5px;
     margin-bottom: 5px;
 
 }
+
 .wtm-panel {
     float: left;
     border-radius: 1px;
@@ -201,44 +228,56 @@ table.wtm-data tr:first-child th,
 table.wtm-data tr:first-child td {
     border-top-style: none;
 }
+
 table.wtm-data tr:last-child th,
 table.wtm-data tr:last-child td {
     border-bottom-style: none;
 }
+
 .wtm-data tr.hl {
     background: rgba(255, 255, 255, .05);
 }
+
 .wtm-data tr.hl td,
 .wtm-data tr.hl th {
     border-bottom-color: rgba(255, 255, 255, .05);
 }
+
 .wtm-data tr.hl th,
 .wtm-data tr.hl td {
     color: #ddd;
 }
+
 .wtm-data tr.hl td {
     font-size: 2em;
 }
+
 .wtm-data tr:hover th,
 .wtm-data tr:hover td {
     border-bottom-color: rgba(255, 255, 255, .05);
 }
+
 .wtm-data tr:hover {
     cursor: pointer;
     background-color: rgba(255, 255, 255, .05);
 }
+
 .wtm-data {
     position: relative;
 }
+
 #map-canvas {
     cursor: -webkit-grab;
 }
+
 #map-canvas:active {
     cursor: -webkit-grabbing;
 }
+
 .wtm-data:hover:after {
     display: block;
 }
+
 .wtm-data:after {
     display: none;
     content: 'Click rows to highlight';
@@ -247,6 +286,7 @@ table.wtm-data tr:last-child td {
     left: 0;
     color: #aaa;
 }
+
 table.wtm-data th,
 table.wtm-data td {
     border-color: rgba(255, 255, 255, .035);
@@ -256,21 +296,26 @@ table.wtm-data td {
     padding: 0 .35em;
     line-height: 1.5em;
 }
+
 table.wtm-data th {
     border-bottom-style: solid;
 }
+
 table.wtm-data td {
     border-left-style: solid;
     border-bottom-style: solid;
 }
+
 table.wtm-data {
     width: 300px;
     border-collapse: collapse;
     table-layout: fixed;
 }
+
 .wtm-panel .wtm-caption:before {
     font-weight: bold;
 }
+
 #wtm-indicators-root .wtm-caption:before {
     content: "Indicators"
 }
@@ -284,20 +329,25 @@ table.wtm-data {
     border-collapse: collapse;
     line-height: 1em;
 }
-.wtm-count {
-}
+
+.wtm-count {}
+
 #wtm-redrow th {
     color: #e70000;
 }
+
 #wtm-bluerow th {
     color: #145CFF;
 }
+
 #wtm-mapsummary th.wtm-aircraft {
     font-family: 'plane_icons';
 }
+
 #wtm-mapsummary td {
     font-size: 11px;
 }
+
 #wtm-mapsummary th {
     font-family: 'Icons';
     font-size: 26px;
@@ -305,17 +355,21 @@ table.wtm-data {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #000;
 }
+
 #draghandle {
     cursor: default !important;
 }
+
 #wtm-map {
     border: 1px solid #555;
     border-top-style: none;
     border-radius: 0 0 1px 1px;
 }
+
 #map-canvas {
     display: block;
 }
+
 #wtm-map-root:after {
     position: absolute;
     content: 'Use the mouse wheel to change the zoom level';
@@ -324,6 +378,7 @@ table.wtm-data {
     display: none;
     color: #aaa;
 }
+
 #wtm-map-root:hover:after {
     display: block;
 }
@@ -333,16 +388,19 @@ table.wtm-data {
     float: right;
     padding-left: 1em;
 }
+
 .wtm-toggle input {
     margin: 0 5px 0 3px;
     position: relative;
     top: 2px;
 }
-.wtm-toggle label {
-}
+
+.wtm-toggle label {}
+
 .wtm-panel.off .wtm-caption {
     border-radius: 1px;
 }
+
 .wtm-panel.off .wtm-panel-contents {
     display: none;
 }
@@ -362,6 +420,7 @@ body {
 #wtm-mapinfo {
     float: right;
 }
+
 #wtm-mapinfo,
 .wtm-toggle {
     color: #aaa;

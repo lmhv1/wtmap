@@ -1,106 +1,106 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>WT map: Options</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles/main.css">
-    </head>
-    <body id="wtm-options">
-        <div id="wtm-wrapper">
-            <div id="wrapper">
-                <div id="header">
-                    <a href="index.html" id="logo"><img src="images/icon-128.png" alt="Logo"></a>
-                    <h1>WT map: Options</h1>
-                </div>
-                <p id="installed">Extension installed.</p>
-                <p id="goto">
-                    <span id="goto_link"><a href="index.html">Go to map</a></span>
-                    <span class="text">(Bookmark this link for quick access)</span>
-                </p>
 
-                <table>
-                    <colgroup>
-                        <col style="width: 40%;">
-                        <col>
-                    </colgroup>
-                    <tr>
-                        <td>
-                            <label for="plane_icon_size">Plane icon size:</label>
-                        </td>
-                        <td>
-                            <input type="text" spellcheck="false" id="plane_icon_size"
-                                   class="input_number">
-                            <span class="text">pixels</span>
-                            <span id="plane_icon_preview"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="map_center">Center map on player:</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="map_center">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Units:</label>
-                        </td>
-                        <td>
-                            <input type="radio" value="meters" id="units-meters" name="units">
-                            <label for="units-meters">Meters</label>
-                            <input type="radio" value="feet" id="units-feet" name="units">
-                            <label for="units-feet">Feet</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="base_url">Map location:</label>
-                        </td>
-                        <td>
-                            <input type="text" spellcheck="false" id="base_url"
-                                   class="input_text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <span class="text">
-                                The map location should be http://localhost:8111/ if the game is running locally.<br>
-                                If you're trying to use the map from a different device,
-                                you need to make sure that the game is not firewalled
-                                and that the network setup allows it (for instance, if
-                                it's possible to connect from wireless to wired devices).
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="object_update_rate">Object poll rate:</label>
-                        </td>
-                        <td>
-                            <input type="text" spellcheck="false" id="object_update_rate"
-                                   class="input_number">
-                            <span class="text">milliseconds</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <span class="text">Object poll rate determines how often
+<head>
+    <title>WT map: Options</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+</head>
+
+<body id="wtm-options">
+    <div id="wtm-wrapper">
+        <div id="wrapper">
+            <div id="header">
+                <a href="index.html" id="logo"><img src="images/icon-128.png" alt="Logo"></a>
+                <h1>WT map: Options</h1>
+            </div>
+            <p id="installed">Extension installed.</p>
+            <p id="goto">
+                <span id="goto_link"><a href="index.html">Go to map</a></span>
+                <span class="text">(Bookmark this link for quick access)</span>
+            </p>
+
+            <table>
+                <colgroup>
+                    <col style="width: 40%;">
+                    <col>
+                </colgroup>
+                <tr>
+                    <td>
+                        <label for="plane_icon_size">Plane icon size:</label>
+                    </td>
+                    <td>
+                        <input type="text" spellcheck="false" id="plane_icon_size" class="input_number">
+                        <span class="text">pixels</span>
+                        <span id="plane_icon_preview"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="map_center">Center map on player:</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="map_center">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Units:</label>
+                    </td>
+                    <td>
+                        <input type="radio" value="meters" id="units-meters" name="units">
+                        <label for="units-meters">Meters</label>
+                        <input type="radio" value="feet" id="units-feet" name="units">
+                        <label for="units-feet">Feet</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="base_url">Map location:</label>
+                    </td>
+                    <td>
+                        <input type="text" spellcheck="false" id="base_url" class="input_text">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="text">
+                            The map location should be http://localhost:8111/ if the game is running locally.<br>
+                            If you're trying to use the map from a different device,
+                            you need to make sure that the game is not firewalled
+                            and that the network setup allows it (for instance, if
+                            it's possible to connect from wireless to wired devices).
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="object_update_rate">Object poll rate:</label>
+                    </td>
+                    <td>
+                        <input type="text" spellcheck="false" id="object_update_rate" class="input_number">
+                        <span class="text">milliseconds</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span class="text">Object poll rate determines how often
                             the map is updated. Increasing this value will make
                             the map update slower and reduce CPU and network usage.</span>
-                        </td>
-                    </tr>
-                </table>
+                    </td>
+                </tr>
+            </table>
 
-                <p>
-                    <button id="save">Save</button>
-                    <button id="restore">Restore Defaults</button>
-                </p>
-                <p id="status"></p>
-            </div>
+            <p>
+                <button id="save">Save</button>
+                <button id="restore">Restore Defaults</button>
+            </p>
+            <p id="status"></p>
         </div>
-        <script src="vendor/jquery-1.10.2.min.js"></script>
-        <script src="scripts/wtm.js"></script>
-        <script src="scripts/options.js"></script>
-    </body>
+    </div>
+    <script src="vendor/jquery-1.10.2.min.js"></script>
+    <script src="scripts/wtm.js"></script>
+    <script src="scripts/options.js"></script>
+</body>
+
 </html>

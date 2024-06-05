@@ -11,9 +11,9 @@ var WTM = {
         update_state: 0
     },
     settings: {},
-    update: function() {
+    update: function () {
         var settings = this.settings;
-        $.each(this.defaults, function(key, value) {
+        $.each(this.defaults, function (key, value) {
             var result = localStorage[key] || value;
             if (typeof value === 'number') {
                 result = parseFloat(result, 10);
@@ -45,10 +45,10 @@ var WTM = {
         'km': 0.001,
         'nmi': 0.000539957
     },
-    m2x: function(m, x) {
+    m2x: function (m, x) {
         return m * this.conversion[x];
     },
-    x2m: function(m, x) {
+    x2m: function (m, x) {
         return m / this.conversion[x];
     }
 };

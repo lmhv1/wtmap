@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     var $inputs = $('input');
@@ -8,7 +8,7 @@
     var $plane_icon_preview = $('#plane_icon_preview');
     var $plane_icon_size = $('#plane_icon_size');
 
-    $text_inputs.keyup(function() {
+    $text_inputs.keyup(function () {
         var $this = $(this);
         $this.data('changed', $this.val() != WTM.settings[$this.attr('id')]);
     });
@@ -19,7 +19,7 @@
     }
 
     var previews = {};
-    $.each(WTM.icons, function(key) {
+    $.each(WTM.icons, function (key) {
         var icon = $('<span>').text(key);
         $plane_icon_preview.append(icon);
         previews[key] = icon;
@@ -27,7 +27,7 @@
 
     function update_icons() {
         var size = parseInt($plane_icon_size.val(), 10) || WTM.defaults.plane_icon_size;
-        $.each(WTM.icons, function(key, value) {
+        $.each(WTM.icons, function (key, value) {
             previews[key].css({
                 'fontSize': size * value + 'px'
             });
@@ -37,21 +37,21 @@
     $plane_icon_size.keyup(update_icons);
 
     var $unit_inputs = $inputs.filter('[name=units]');
-    $unit_inputs.change(function() {
+    $unit_inputs.change(function () {
         var $this = $(this);
         var val = $this.val();
         $unit_inputs.not($this).data('changed', false);
         $this.data('changed', val !== WTM.settings.units);
     });
 
-    $checkbox_inputs.change(function() {
+    $checkbox_inputs.change(function () {
         var $this = $(this);
         $this.data('changed', this.checked * 1 !== WTM.settings[$this.attr('id')]);
     });
 
     function load_values() {
         var settings = WTM.settings;
-        $text_inputs.each(function() {
+        $text_inputs.each(function () {
             var $this = $(this);
             var key = $this.attr('id');
             var val = settings[key];
@@ -59,7 +59,7 @@
             $this.val(val);
         });
 
-        $checkbox_inputs.each(function() {
+        $checkbox_inputs.each(function () {
             var $this = $(this);
             this.checked = !!settings[$this.attr('id')];
             $this.data('changed', false);
@@ -71,10 +71,11 @@
     }
 
     var status_timeout;
+
     function display_status(text) {
         $status.text(text);
         window.clearTimeout(status_timeout);
-        status_timeout = window.setTimeout(function() {
+        status_timeout = window.setTimeout(function () {
             $status.text('');
         }, 3000);
     }
@@ -82,13 +83,14 @@
     load_values();
 
     var $status = $('#status');
-    $('#save').click(function() {
-        chrome.permissions.remove({origins: [WTM.settings.base_url]},
-        function() {
-        });
+    $('#save').click(function () {
+        chrome.permissions.remove({
+                origins: [WTM.settings.base_url]
+            },
+            function () {});
         var units = $unit_inputs.filter(':checked').val();
 
-        $text_inputs.each(function() {
+        $text_inputs.each(function () {
             var $this = $(this);
             var val = $this.val().trim();
             var key = $this.attr('id');
@@ -104,7 +106,7 @@
             localStorage[key] = val;
         });
 
-        $checkbox_inputs.each(function() {
+        $checkbox_inputs.each(function () {
             var $this = $(this);
             var val = this.checked * 1;
             var key = $this.attr('id');
@@ -120,18 +122,19 @@
         WTM.update();
         load_values();
 
-        chrome.permissions.request({origins: [WTM.settings.base_url]},
-        function() {
-        });
+        chrome.permissions.request({
+                origins: [WTM.settings.base_url]
+            },
+            function () {});
 
         display_status('Options saved');
     });
-    $('#restore').click(function() {
+    $('#restore').click(function () {
         if (!confirm('Are you sure you want to restore the default options?')) {
             return;
         }
         WTM.settings = jQuery.extend({}, WTM.defaults);
-        $.each(WTM.defaults, function(key) {
+        $.each(WTM.defaults, function (key) {
             localStorage.removeItem(key);
         });
         load_values();
@@ -139,9 +142,9 @@
         display_status('Defaults restored');
     });
 
-    window.onbeforeunload = function() {
+    window.onbeforeunload = function () {
         var changes = false;
-        $inputs.each(function() {
+        $inputs.each(function () {
             if ($(this).data('changed')) {
                 changes = true;
                 return false;
@@ -152,25 +155,25 @@
         }
     };
 
-    $('#show_advanced button').click(function() {
+    $('#show_advanced button').click(function () {
         $('tr.advanced').show();
         $(this).attr('disabled', 'disabled');
     });
 
-    $('#goto a').each(function() {
+    $('#goto a').each(function () {
         var $this = $(this);
         $('<a id="goto_sub">')
-                .attr('href', $this.attr('href'))
-                .text('WT map')
-                .mousedown(function() {
-                    $this.addClass('active');
-                })
-                .mouseup(function() {
-                    $this.removeClass('active');
-                })
-                .mouseleave(function() {
-                    $this.removeClass('active');
-                })
-                .appendTo($this.parent());
+            .attr('href', $this.attr('href'))
+            .text('WT map')
+            .mousedown(function () {
+                $this.addClass('active');
+            })
+            .mouseup(function () {
+                $this.removeClass('active');
+            })
+            .mouseleave(function () {
+                $this.removeClass('active');
+            })
+            .appendTo($this.parent());
     });
 })();
