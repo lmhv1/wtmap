@@ -41,6 +41,14 @@ Installation
 
 The extension can be installed from its [Chrome Web Store page](https://chrome.google.com/webstore/detail/gmhaddmfnmddbjgobfjfghpjlbgmeiop).
 
+For the co-op version, you will need to install this extension locally.
+
+**In Google Chrome:**
+ 1. Go to [chrome://extensions](chrome://extensions) and enable Developer mode using the toggle button on the top right.
+ 2. Download the source code and extract somewhere you would want to keep it.
+ 3. Back in the chrome extensions page, click "Load unpacked" and select the "src" folder from the source files.
+ 4. To access the extension, copy the extension ID and go to **chrome-extension://{id}/options.html** replacing {id} with your own.
+
 Usage
 -----
 
@@ -55,6 +63,18 @@ the map location would be http://192.168.1.1:8111/. The game process (aces.exe)
 may need to be allowed through the firewall. If one of the devices is wireless
 and the other wired, the local network needs to be configured to allow
 them to connect.
+
+Co-op
+-----
+
+Co-op was built with air simulation battles in mind. This functionality allows you to
+get friends' map objects info such as their location and objects around them by
+using their IP (either LAN or through a private network service such as [Radmin VPN](https://www.radmin-vpn.com/)).
+
+**Considerations**: While using this feature, some map objects may be duplicated.
+Setting the co-op poll rate to the same rate as the player's poll rate helps with
+making this issue less noticeable, however the summary of total objects will still
+show the duplicated values.
 
 Notes
 -----

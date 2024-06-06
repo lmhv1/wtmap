@@ -89,6 +89,31 @@
                             the map update slower and reduce CPU and network usage.</span>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <label for="coop_enabled">Poll other ips</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="coop_enabled">
+                    </td>
+                </tr>
+                <tr id="tr_coop_ips">
+                    <td>
+                        <label for="coop_ips">Coop IPs (separate by comma ","):</label>
+                    </td>
+                    <td>
+                        <input type="text" spellcheck="false" id="coop_ips" class="input_text">
+                    </td>
+                </tr>
+                <tr id="tr_coop_update_rate">
+                    <td>
+                        <label for="coop_update_rate">Coop poll rate:</label>
+                    </td>
+                    <td>
+                        <input type="text" spellcheck="false" id="coop_update_rate" class="input_number">
+                        <span class="text">milliseconds</span>
+                    </td>
+                </tr>
             </table>
 
             <p>

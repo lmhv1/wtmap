@@ -176,4 +176,9 @@
             })
             .appendTo($this.parent());
     });
+
+    $('#coop_enabled').change(function () {
+        $('#tr_coop_ips').toggle(this.checked);
+        $('#tr_coop_update_rate').toggle(this.checked);
+    }).change();
 })();

@@ -216,16 +216,28 @@ $.get(WTM.settings.base_url, function (data) {
             'Tracked', 'Wheeled', 'Ship', 'Airdefence', 'Structure'
         ];
 
+
+
         var _update_object_positions = update_object_positions;
         update_object_positions = function (objects) {
             _player = null;
 
+            $.each(objects, function (i, item) {
+                if (item.icon === 'Player') {
+                    _player = item;
+                }
+            });
+
+            $.each(coop_info, function (i, obj) {
+                $.each(obj, function (i, a) {
+                    if (a.icon === 'Player') {
+                        a.icon = "Friend";
+                    }
+                    objects.push(a);
+                });
+            });
 
             objects.sort(function (a, b) {
-                if (a.icon === 'Player') {
-                    _player = a;
-                }
-
                 // Put aircrafts at the end so they are drawn last
                 return (_type_priority[a.type] || 0) > (_type_priority[b.type] || 0);
             });
@@ -239,6 +251,9 @@ $.get(WTM.settings.base_url, function (data) {
                 $.each(objects, function (i, item) {
                     var color = item['color[]'];
                     var team = color[0] > color[2] ? 'red' : 'blue';
+                    if (color[1] > color[0] && color[1] > color[2]) {
+                        team = 'green';
+                    }
 
                     var icon = item.icon;
                     if (icon !== 'none' && icon !== 'Player') {
@@ -246,7 +261,8 @@ $.get(WTM.settings.base_url, function (data) {
                         if (!_summary) {
                             _summary = summary[icon] = [0, 0];
                         }
-                        _summary[team === 'blue' ? 0 : 1] += 1;
+                        // _summary[team === 'blue' ? 0 : 1] += 1;
+                        _summary[team === 'red' ? 1 : 0] += 1;
                     }
 
                     if (item.type !== 'aircraft' || item.icon === 'Player') {
@@ -371,9 +387,9 @@ $.get(WTM.settings.base_url, function (data) {
             update_scale();
         };
 
-        function xhr_onload(handler, send, rate) {
+        function xhr_onload(handler, send, rate, ip) {
             if (this.on) {
-                handler(this.responseText ? JSON.parse(this.responseText) : null);
+                handler(this.responseText ? JSON.parse(this.responseText) : null, ip);
             }
             setTimeout(send, rate);
         }
@@ -387,10 +403,10 @@ $.get(WTM.settings.base_url, function (data) {
             }
         }
 
-        function poll_url(url, handler, rate, on) {
+        function poll_url(url, handler, rate, on, ip = "") {
             var xhr = new XMLHttpRequest();
             var send = send_xhr.bind(xhr, url);
-            xhr.onload = xhr_onload.bind(xhr, handler, send, rate);
+            xhr.onload = xhr_onload.bind(xhr, handler, send, rate, ip);
             xhr.on = on;
             send();
             return xhr;
@@ -475,6 +491,12 @@ $.get(WTM.settings.base_url, function (data) {
             update_table(data, state_data, $state_table, 'state');
         }
 
+        var coop_info = new Object;
+
+        function update_coop_info(data, ip) {
+            coop_info[ip] = data;
+        }
+
         load_positions = function () {};
 
         $.fn.resizable = function () {};
@@ -484,6 +506,14 @@ $.get(WTM.settings.base_url, function (data) {
         // Clear existing intervals
         for (var i = 1, n = setTimeout(function () {}, 0); i < n; i++) {
             window.clearInterval(i);
+        }
+
+        if (_settings.coop_enabled) {
+            _settings.coop_ips.split(',')
+                .forEach(function (ip) {
+                    poll_url('http://' + ip + ':8111/map_obj.json',
+                        update_coop_info, _settings.coop_update_rate, true, ip);
+                });
         }
 
         poll_url('/map_obj.json',

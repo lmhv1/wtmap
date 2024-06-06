@@ -1,6 +1,6 @@
 var WTM = {
     defaults: {
-        units: 'meters',
+        units: 'feet',
         plane_icon_size: 25,
         base_url: 'http://localhost:8111/',
         map_center: 1,
@@ -8,7 +8,10 @@ var WTM = {
         panels_update_rate: 500,
         map_info_update_rate: 5000,
         update_indicators: 0,
-        update_state: 0
+        update_state: 0,
+        coop_enabled: 0,
+        coop_ips: '',
+        coop_update_rate: 1000,
     },
     settings: {},
     update: function () {
@@ -36,7 +39,8 @@ var WTM = {
     icon_texts: {
         'Fighter': 'a',
         'Bomber': 'b',
-        'Assault': 'c'
+        'Assault': 'c',
+        'Friend': 'a',
     },
     conversion: {
         'meters': 1,
