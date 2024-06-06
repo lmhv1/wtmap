@@ -105,6 +105,9 @@ and Ju 88 for bombers.
 Changelog
 ---------
 
+**0.2.7** [2024-06-05]
+ * Added Co-op functionality
+
 **0.2.6** [2013-12-18]
 
  * Fix title info not updating properly if player is not spawned
