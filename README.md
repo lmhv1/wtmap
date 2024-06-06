@@ -45,9 +45,11 @@ For the co-op version, you will need to install this extension locally.
 
 **In Google Chrome:**
  1. Go to [chrome://extensions](chrome://extensions) and enable Developer mode using the toggle button on the top right.
- 2. Download the source code and extract somewhere you would want to keep it.
+ 2. Download the source code [here](https://github.com/lmhv1/wtmap/releases) and extract somewhere you would want to keep it.
  3. Back in the chrome extensions page, click "Load unpacked" and select the "src" folder from the source files.
  4. To access the extension, copy the extension ID and go to **chrome-extension://{id}/options.html** replacing {id} with your own.
+
+![Extension ID](https://raw.github.com/lmhv1/wtmap/master/extid.png)
 
 Usage
 -----
@@ -75,6 +77,8 @@ using their IP (either LAN or through a private network service such as [Radmin 
 Setting the co-op poll rate to the same rate as the player's poll rate helps with
 making this issue less noticeable, however the summary of total objects will still
 show the duplicated values.
+
+![Co-op](https://raw.github.com/lmhv1/wtmap/master/coop.png)
 
 Notes
 -----
